@@ -511,6 +511,7 @@ MonoBehaviour:
   jumpForce: 40
   controller: {fileID: 0}
   gravityScale: 1
+  anim: {fileID: 1968869406}
 --- !u!1 &860152729
 GameObject:
   m_ObjectHideFlags: 0
@@ -1243,5 +1244,10 @@ Prefab:
 --- !u!4 &1968869405 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400012, guid: b848ddb4f168e1e4c8a9a69675e8efa4,
+    type: 3}
+  m_PrefabInternal: {fileID: 1968869404}
+--- !u!95 &1968869406 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: b848ddb4f168e1e4c8a9a69675e8efa4,
     type: 3}
   m_PrefabInternal: {fileID: 1968869404}
