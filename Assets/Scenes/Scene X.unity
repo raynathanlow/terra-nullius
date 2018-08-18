@@ -364,7 +364,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 522772330}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.35, z: -10}
+  m_LocalPosition: {x: 0, y: 2.35, z: -5.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 466444085}
@@ -383,7 +383,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 632728197}
-  offset: {x: 0, y: 0, z: 0}
+  offset: {x: 0, y: -5, z: 10}
   useOffsetValues: 0
   rotateSpeed: 10
   pivot: {fileID: 466444085}
