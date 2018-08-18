@@ -507,11 +507,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7874e055a73ddf4582c06a9dd02d452, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  jumpForce: 40
   controller: {fileID: 0}
-  gravityScale: 1
+  moveSpeed: 10
+  jumpForce: 15
+  gravityScale: 5
   anim: {fileID: 1968869406}
+  pivot: {fileID: 466444085}
+  rotateSpeed: 25
+  playerModel: {fileID: 2104619239}
 --- !u!1 &860152729
 GameObject:
   m_ObjectHideFlags: 0
@@ -1249,5 +1252,10 @@ Transform:
 --- !u!95 &1968869406 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 9500000, guid: b848ddb4f168e1e4c8a9a69675e8efa4,
+    type: 3}
+  m_PrefabInternal: {fileID: 1968869404}
+--- !u!1 &2104619239 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100012, guid: b848ddb4f168e1e4c8a9a69675e8efa4,
     type: 3}
   m_PrefabInternal: {fileID: 1968869404}
