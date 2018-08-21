@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
     private Vector3 moveDirection;
@@ -16,10 +16,12 @@ public class PlayerController : MonoBehaviour
     public float rotateSpeed;
 
     public GameObject playerModel;
+    private GameObject fireAttackModel;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
+        fireAttackModel = this.transform.Find("Fire Attack").gameObject;
     }
 
     void Update()
@@ -45,9 +47,11 @@ public class PlayerController : MonoBehaviour
         // Move the player in different directions based on camera look direction
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
+            // may want to put this in a different script to update the appearance of all models
             transform.rotation = Quaternion.Euler(0f, pivot.rotation.eulerAngles.y, 0f);
             Quaternion newRotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0f, moveDirection.z));
             playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, newRotation, rotateSpeed * Time.deltaTime);
+            fireAttackModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, newRotation, rotateSpeed * Time.deltaTime);
         }
 
         anim.SetBool("isGrounded", controller.isGrounded);
