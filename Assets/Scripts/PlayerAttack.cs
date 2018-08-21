@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour {
 
     private GameObject fireAttack;
+    private GameObject waterAttack;
 
 	// Use this for initialization
 	void Start () {
         fireAttack = this.transform.Find("Fire Attack").gameObject;
+        waterAttack = this.transform.Find("Water Attack").gameObject;
     }
 	
 	// Update is called once per frame
@@ -17,7 +19,11 @@ public class PlayerAttack : MonoBehaviour {
         {
             ToggleFire();
         }
-	}
+        if (Input.GetMouseButtonDown(1))
+        {
+            ToggleWater();
+        }
+    }
 
     private void ToggleFire()
     {
@@ -27,6 +33,20 @@ public class PlayerAttack : MonoBehaviour {
         } else
         {
             fireAttack.SetActive(true);
+            waterAttack.SetActive(false);
+        }
+    }
+
+    private void ToggleWater()
+    {
+        if (waterAttack.activeSelf)
+        {
+            waterAttack.SetActive(false);
+        }
+        else
+        {
+            waterAttack.SetActive(true);
+            fireAttack.SetActive(false);
         }
     }
 }

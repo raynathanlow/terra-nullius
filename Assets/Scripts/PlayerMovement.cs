@@ -17,11 +17,13 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject playerModel;
     private GameObject fireAttackModel;
+    private GameObject waterAttackModel;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
         fireAttackModel = this.transform.Find("Fire Attack").gameObject;
+        waterAttackModel = this.transform.Find("Water Attack").gameObject;
     }
 
     void Update()
@@ -52,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
             Quaternion newRotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0f, moveDirection.z));
             playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, newRotation, rotateSpeed * Time.deltaTime);
             fireAttackModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, newRotation, rotateSpeed * Time.deltaTime);
+            waterAttackModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, newRotation, rotateSpeed * Time.deltaTime);
         }
 
         anim.SetBool("isGrounded", controller.isGrounded);
