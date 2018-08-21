@@ -18,5 +18,12 @@ public class Ignite : MonoBehaviour {
         {
             flame.SetActive(true);
         }
+        if (collision.gameObject.name == "Water Attack")
+        {
+            if (flame.activeSelf)
+            {
+                flame.SetActive(false);
+            }
+        }
     }
 }
