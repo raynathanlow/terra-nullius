@@ -349,7 +349,7 @@ GameObject:
   m_Component:
   - component: {fileID: 466444085}
   m_Layer: 0
-  m_Name: f
+  m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -520,7 +520,7 @@ MonoBehaviour:
   target: {fileID: 466444085}
   distanceFromTarget: 0
   mouseSensitivity: 0
-  pitchMinMax: {x: -40, y: 85}
+  pitchMinMax: {x: -22, y: 85}
 --- !u!1 &632728193
 GameObject:
   m_ObjectHideFlags: 0
