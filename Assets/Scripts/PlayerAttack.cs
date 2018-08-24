@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-
+    public GameObject playerModel;
     private GameObject fireAttack;
     private GameObject waterAttack;
 
@@ -36,12 +36,16 @@ public class PlayerAttack : MonoBehaviour
 
     private void FireAttack()
     {
+        playerModel.transform.rotation = Quaternion.Euler(0f, Camera.main.transform.eulerAngles.y, 0f);
+        fireAttack.transform.rotation = Quaternion.Euler(0f, Camera.main.transform.eulerAngles.y, 0f);
         fireAttack.SetActive(true);
         waterAttack.SetActive(false);
     }
 
     private void WaterAttack()
     {
+        playerModel.transform.rotation = Quaternion.Euler(0f, Camera.main.transform.eulerAngles.y, 0f);
+        waterAttack.transform.rotation = Quaternion.Euler(0f, Camera.main.transform.eulerAngles.y, 0f);
         fireAttack.SetActive(false);
         waterAttack.SetActive(true);
     }
