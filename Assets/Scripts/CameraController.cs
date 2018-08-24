@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour {
     public float distanceFromTarget;
     public float mouseSensitivity;
 
-    public Vector2 pitchMinMax = new Vector2(-40, 85);
+    public Vector2 pitchMinMax = new Vector2(-22, 85);
 
     private float yaw;
     private float pitch;
