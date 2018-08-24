@@ -16,14 +16,13 @@ public class PlayerMovement : MonoBehaviour
     public float rotateSpeed;
 
     public GameObject playerModel;
-    private GameObject fireAttackModel;
-    private GameObject waterAttackModel;
+
+    private Transform cameraT;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        fireAttackModel = this.transform.Find("Fire Attack").gameObject;
-        waterAttackModel = this.transform.Find("Water Attack").gameObject;
+        cameraT = Camera.main.transform;
     }
 
     void Update()
@@ -50,11 +49,9 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
             // may want to put this in a different script to update the appearance of all models
-            transform.rotation = Quaternion.Euler(0f, pivot.rotation.eulerAngles.y, 0f);
+            transform.rotation = Quaternion.Euler(0f, cameraT.eulerAngles.y, 0f);
             Quaternion newRotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0f, moveDirection.z));
             playerModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, newRotation, rotateSpeed * Time.deltaTime);
-            fireAttackModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, newRotation, rotateSpeed * Time.deltaTime);
-            waterAttackModel.transform.rotation = Quaternion.Slerp(playerModel.transform.rotation, newRotation, rotateSpeed * Time.deltaTime);
         }
 
         anim.SetBool("isGrounded", controller.isGrounded);

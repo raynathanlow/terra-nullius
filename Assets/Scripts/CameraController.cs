@@ -5,71 +5,32 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
 
     public Transform target;
+    public float distanceFromTarget;
+    public float mouseSensitivity;
 
-    public Vector3 offset;
-    public bool useOffsetValues;
+    public Vector2 pitchMinMax = new Vector2(-40, 85);
 
-    public float rotateSpeed;
-    public Transform pivot;
+    private float yaw;
+    private float pitch;
 
-    public float maxViewAngle;
-    public float minViewAngle;
-
-    public bool invertY;
+    private float rotationSmoothTime = .12f;
+    private Vector3 rotationSmoothVelocity;
+    private Vector3 currentRotation;
 
     void Start () {
-        if (!useOffsetValues)
-        {
-            offset = target.position - transform.position;
-        }
-
-        pivot.transform.position = target.transform.position;
-        // pivot.transform.parent = target.transform;
-        pivot.transform.parent = null;
-
+        distanceFromTarget = 4f;
+        mouseSensitivity = 2f;
         Cursor.lockState = CursorLockMode.Locked;
 	}
 	
 	void LateUpdate () {
+        yaw += Input.GetAxis("Mouse X") * mouseSensitivity;
+        pitch -= Input.GetAxis("Mouse Y") * mouseSensitivity;
+        pitch = Mathf.Clamp(pitch, pitchMinMax.x, pitchMinMax.y);
 
-        pivot.transform.position = target.transform.position;
+        currentRotation = Vector3.SmoothDamp(currentRotation, new Vector3(pitch, yaw), ref rotationSmoothVelocity, rotationSmoothTime);
+        transform.eulerAngles = currentRotation;
 
-        // Get the X position of the mouse and rotate the target
-        float horizontal = Input.GetAxis("Mouse X") * rotateSpeed;
-        pivot.Rotate(0, horizontal, 0);
-
-        // Get the Y position of the mouse and rotate the pivot
-        float vertical = Input.GetAxis("Mouse Y") * rotateSpeed;
-        if (invertY)
-        {
-            pivot.Rotate(vertical, 0, 0);
-        } else
-        {
-            pivot.Rotate(-vertical, 0, 0);
-        }
-
-        // Limit up/down camera rotation
-        if (pivot.rotation.eulerAngles.x > maxViewAngle && pivot.rotation.eulerAngles.x < 180f)
-        {
-            pivot.rotation = Quaternion.Euler(maxViewAngle, pivot.rotation.eulerAngles.y, 0);
-        }
-        if (pivot.rotation.eulerAngles.x > 180f && pivot.rotation.eulerAngles.x < 360f + minViewAngle)
-        {
-            pivot.rotation = Quaternion.Euler(360f + minViewAngle, pivot.rotation.eulerAngles.y, 0);
-        }
-
-        // Move the camera based on the current rotation of the target and the original offset
-        float desiredXAngle = pivot.eulerAngles.x;
-        float desiredYAngle = pivot.eulerAngles.y;
-        Quaternion rotation = Quaternion.Euler(desiredXAngle, desiredYAngle, 0);
-        transform.position = target.position - (rotation * offset);
-
-        // Limits camera y-axis
-        if (transform.position.y < target.position.y)
-        {
-            transform.position = new Vector3(transform.position.x, target.position.y - 0.5f, transform.position.z);
-        }
-
-        transform.LookAt(target);
-	}
+        transform.position = target.position - transform.forward * distanceFromTarget;
+    }
 }
